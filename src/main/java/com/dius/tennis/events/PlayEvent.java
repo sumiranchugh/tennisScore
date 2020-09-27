@@ -2,6 +2,8 @@ package com.dius.tennis.events;
 
 import com.dius.tennis.state.Scorecard;
 
+import java.util.Scanner;
+
 import static com.dius.tennis.state.Score.*;
 
 class PlayEvent {
@@ -11,20 +13,22 @@ class PlayEvent {
     Scorecard scorecard = new Scorecard();
     boolean clear;
 
-//    public static void main(String[] args) {
-//        System.out.println("Match starts");
-//        PlayEvent event = new PlayEvent();
-//        event.score(0);
-//        event.score(1);
-//        event.score(0);
-//        event.score(1);
-//        event.score(0);
-//        event.score(1);
-//        event.score(1);
-//        event.score(0);
-//        event.score(0);
-//        event.score(0);
-//    }
+    public static void main(String[] args) {
+        System.out.println("Match starts. Score Board: ");
+        PlayEvent event = new PlayEvent();
+        System.out.println(event.getScorecard());
+        System.out.println("If  player 1 wins type 1 else if player 2 wins type 2. type q to quit");
+        Scanner scanner = new Scanner(System.in);
+        while(!scanner.hasNext("q")) {
+            int score = scanner.nextInt();
+            if (score == 1 || score == 2){
+                event.score(score-1); System.out.println(event.getScorecard());
+            }
+            else {
+                System.out.println("Please enter valid input as 1, 2 or 'q' to quit.");
+            }
+        }
+    }
 
     Scorecard score(int winIndex) {
         if (clear) {
